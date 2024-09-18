@@ -65,7 +65,7 @@ public class SingleLinkedList_Tail {
 
             while(cur.next != null){
 
-                if (cur.data == node1 && cur.next.data == node2){
+                if (cur.data.equals(node1) && cur.next.data.equals(node2)){
                     SingleNode newNode = new SingleNode(value);
                     newNode.next = cur.next;
                     cur.next = newNode;
@@ -232,7 +232,7 @@ public class SingleLinkedList_Tail {
 
 
     public String displayFirst(){
-        return head == null ? "The list is empty" : head.data;
+        return head == null ? "The list is empty" :  head.data;
     }
 
     public void displayLast() {
@@ -253,7 +253,7 @@ public class SingleLinkedList_Tail {
     public void displayPreSussNode(String value){
         if (head == null){
             System.out.println("The list is empty");
-        } else if (head.data == value) {
+        } else if (head.data.equals(value)) {
             System.out.println("there is no previous node");
             System.out.println("the node after the selected node is: " +head.next.data);
         }
