@@ -258,8 +258,8 @@ public class SingleLinkedList_NoTail {
         if (head == null){
             System.out.println("The list is empty");
         } else if (head.data == value) {
-            System.out.println("there no pre node");
-            System.out.println(head.next.data);
+            System.out.println("there is no previous node");
+            System.out.println("the node after the selected node is: " +head.next.data);
         }
         else{
             SingleNode cur = head;
@@ -268,7 +268,7 @@ public class SingleLinkedList_NoTail {
                     System.out.println("the node before the selected node is: "+cur.data);
 
                     if (cur.next.next == null) {
-                        System.out.println("there isn`t node after node selected");
+                        System.out.println("there isn`t node after the node you selected");
                     } else {
                         System.out.println("the node after the selected node is: " + cur.next.next.data);
                     }
