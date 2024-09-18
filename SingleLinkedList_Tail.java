@@ -1,296 +1,283 @@
-public class SSL_Tail {
-  
-     Node head;
-    
-    Node tail;
-    
-SSL_Tail(){
+package LinkedList;
 
-    head=tail;
+public class SingleLinkedList_Tail {
+    SingleNode head;
+    SingleNode tail;
 
-}
-    
+//  start of Insert methods
 
-
-// inserting  
-    public void insert_first(String n){
-    if(head==null){
-        head=tail=new Node(n);
-}
-
-    else if(head==tail){
-            head.next=tail;
-        head=new Node(n);
-    }
-    else{
-
-        tail.next=null;
-   Node nn=new Node(n);
-   nn.next=head;
-   head=nn;
-    }
-    
-    }
-    public void insert_Last(String n){
-        if(head==null){System.out.println("Ther is no tail jast head");}
-        else if (head==tail){
-        tail=new Node(n);
-        head.next=tail;
+    public void insertFirst(String value){
+        SingleNode newNode = new SingleNode(value);
+        if (head == null){
+            head =newNode;
+            tail = newNode;
         }
         else{
-    Node nn=new Node(n);
-    tail.next=nn;
-   tail=nn;
+            newNode.next = head;
+            head = newNode;
         }
     }
-    
-    public void insert_After_Node(String n1,String n2){
-         if(head==null){System.out.println("Ther is no tail jast head");}
-        else if (head==tail){
-            if(n1==head.data){
-            Node nn=new Node(n2);
-          nn.next=tail;
-          head.next=nn;}
-            else{System.out.println("not vailbel");}
+
+    public void insertLast(String value){
+        SingleNode newNode = new SingleNode(value);
+        if (head == null){
+            head = newNode;
+            tail = newNode;
         }
-        else if(tail.data==n1){
-        this.insert_Last(n2);
+        else {
+            tail.next = newNode;
+            tail = newNode;
+        }
+    }
+
+    public void insertAfterNode(String data, String value) {
+        if (head == null) {
+            System.out.println("The list is Empty ):");
+        } else {
+            SingleNode cur = head;
+
+
+            while (cur != null && !cur.data.equals(data)) {
+                cur = cur.next;
+            }
+
+            // If we found the node, insert the new node after it
+            if (cur != null) {
+                SingleNode newNode = new SingleNode(value);
+                newNode.next = cur.next; // Point the new node to the next node
+                cur.next = newNode; // Link the current node to the new node
+            } else {
+                System.out.println("Node with data '" + data + "' not found.");
+            }
+        }
+    }
+
+
+    public void insertInBetween(String value,String node1,String node2){
+        if (head == null){
+            System.out.println("The list is empty");
+        }
+        else if (head == head.next) {
+            System.out.println("The list just have one Node");
         }
         else{
-           Node crant=head.next;
- while(crant!=tail){
- if(crant.data==n1){
- Node nn=new Node(n2);
- nn.next=crant.next;
- crant.next=nn;
- }
+            SingleNode cur = head;
 
- crant=crant.next;
- 
- }
-        }
-    }
-    
-    public void insert_In_Between(String n1,String n2,String n3) {  
-        if(head==null){
-    System.out.println("not vailbel");
+            while(cur.next != null){
+
+                if (cur.data == node1 && cur.next.data == node2){
+                    SingleNode newNode = new SingleNode(value);
+                    newNode.next = cur.next;
+                    cur.next = newNode;
+                    break;
+                }
+                cur = cur.next;
+            }
+            if (cur.next == null){
+                System.out.println("The one or both of node is not found");
+            }
         }
 
-    else if(head==tail){
-         System.out.println("not vaibel");
     }
-    else{
-           Node crant=head.next;
- while(crant!=null){
- if((crant.data==n1)&&(crant.next.data==n2)){
- Node nn=new Node(n3);
- nn.next=crant.next;
-crant.next=nn;
- }
 
- crant=crant.next;
+    //    Ends of inserts Methods
+//    Start of deletes Methods
+    public void deleteFirst(){
+        if (head ==null){
+            System.out.println("The list is empty");
+        }
+        else {
+            head = head.next;
+        }
     }
+
+    public void deleteLast(){
+        if (head == null){
+            System.out.println("The list is empty");
+        }
+        else if (head.next == null) {
+            head = null;
+        }
+        else {
+            SingleNode cur = head;
+            while (cur.next.next != null){
+                cur = cur.next;
+            }
+            cur.next = null;
+        }
     }
-    
-}
-///inserting
-///////////////////////////////    
+
+    public void deleteNode(String value) {
+        if (head == null) {
+            System.out.println("The list is empty");
+        } else if (head.data.equals(value)) {
+            deleteFirst();
+
+        } else {
+            SingleNode cur = head;
+            boolean found = false;
+            while (cur.next != null) {
+                if (cur.next.data.equals(value)) {
+                    // Deleting the node by skipping it
+                    cur.next = cur.next.next;
+                    found = true;
+                    break;
+                }
+
+                cur = cur.next;
+            }
+
+            if (!found) {
+                System.out.println("Node with value " + value + " not found");
+            }
+
+        }
+    }
 
 
+    public void deleteAfterNode(String value){
+        if (head == null)
+            System.out.println("The list is empty");
+        else if (head.data.equals(value)) {
+            head.next = head.next.next;
+        }
+        else{
+            SingleNode cur = head;
+            boolean found =false;
+
+            while(cur != null){
+                if (cur.data.equals(value)) {
+                    if (cur.next != null) {
+                        cur.next = cur.next.next;
+                        found = true;
+                    } else {
+                        System.out.println("There is no node after the node you selected");
+                        found = true;
+                    }
+                    break;
+                }
 
 
-//deleteing    
-    
- public void Delet_first(){
- 
-     if (head==null){
-     System.out.println("is not visebel");
-     }
-     else if(head==tail){
-     System.out.println("Thier is jast one element in the lest so we cannot delet");
-     }
-     else{
-     Node nh=head.next;
-     head=null;
-     head=nh;
-     }
- 
- }
- 
- 
- public void Delet_last(){
-      if (head==null){
-     System.out.println("Their is no tail");
-     }
-     else if(head==tail){
-     System.out.println("Thier is jast one element in the lest so we cannot delet");
-     }
-     else{
-         Node nt;
-         Node crant=head.next;
-   while(crant!=null){
-   if(crant.next==tail){
-   nt=crant;
-   tail=null;
-   tail=nt;
-   tail.next=null;        
-   }
-  crant=crant.next;
-   }
-     }
- 
- 
- }
- 
- 
+                cur = cur.next;
+            }
+            if (!found){
+                System.out.println("Node with value " + value + " not found");
+            }
+        }
 
- public void Delet_node(String n){
- 
-   if (head==null){
-     System.out.println("Their is no any vairbel");
-     }
-     else if(head==tail){
-     System.out.println("Thier is jast one element in the lest so we cannot delet");
-     }
-     else{
-     Node crant=head;
-     
-     while(crant!=tail){
-         if(crant.next.data==n){
-         crant.next=crant.next.next;
-         }
-             
-  crant=crant.next;
-           
-     }
- 
- }
-    
- }
- 
- 
- public void Delet_after_node(String n){
-    if (head==null){
-     System.out.println("Their is no any vairbel");
-     }
-     else if(head==tail){
-     System.out.println("Thier is jast one element in the lest so we cannot delet");
-     }
-     else{
-     Node crant=head.next;
-     
-     while(crant!=tail){
-         if(crant.data==n){
-         crant.next=crant.next.next;
-         }
-             
-  crant=crant.next;
-           
-     }
- 
- }
- 
- 
- }
- 
- ///deleting
- ///////////////////////
- 
- 
- 
- 
- 
- 
- 
- //coumnt
+    }
+
+
+//    Ends of deletes Methods
+//   count methods
+
     public int count(){
-    int n=0;
-Node crant=head;
-while(crant!=null){
-n++;
-crant=crant.next;
-}
-  
-  return n;  
+        if (head == null){
+            return 0;
+        }
+        SingleNode cur = head;
+        int length = 0;
+        while(cur.next != null){
+            length++;
+            cur = cur.next;
+        }
+        return length+1;
     }
-//////////////////////////////////
-    
-  
+//   count methods
 
-//Display    
- public void Display_list(){
- Node crant=head;
- 
- while(crant!=null){
- 
-  System.out.println(crant.data);
- crant=crant.next;
- 
- }
- 
- }  
+//    Search methods
+
+    public void searchNode(String data){
+        if (head == null){
+            System.out.println("List is empty");
+        }
+        else{
+            if (head.data.equals(data))
+                System.out.println("The node founded (:");
+
+            else {
+                SingleNode cur = head;
+                boolean found = false;
+                while(cur != null){
+                    if (cur.data.equals(data)) {
+                        System.out.println("The node founded (:");
+                        found = true;
+                        break;
+                    }
+                    cur = cur.next;
+                }
+                if (!found)
+                    System.out.println("The node not found ):");
+            }
+
+        }
+    }
+
+//    Search methods
+
+    //    Start of Displays methods
+    public void displayList(){
+        if (head == null){
+            System.out.println("The list is empty");
+            return;
+        }
+        SingleNode cur = head;
+
+        while(cur != null){
+            System.out.print(cur.data +" -> ");
+            cur = cur.next;
+        }
+        System.out.println();
+    }
 
 
-public void Display_frist(){
-System.out.println(head.data);
+    public String displayFirst(){
+        return head == null ? "The list is empty" : head.data;
+    }
+
+    public void displayLast() {
+        if (head == null) {
+            System.out.println("The list is empty");
+        } else {
+
+
+            System.out.println("Last node data: " + tail.data);
+        }
+    }
+
+
+
+    public int displayCount(){
+        return count();
+    }
+    public void displayPreSussNode(String value){
+        if (head == null){
+            System.out.println("The list is empty");
+        } else if (head.data == value) {
+            System.out.println("there is no previous node");
+            System.out.println("the node after the selected node is: " +head.next.data);
+        }
+        else{
+            SingleNode cur = head;
+            while(cur != null){
+                if (cur.next.data.equals(value)){
+                    System.out.println("the node before the selected node is: "+cur.data);
+
+                    if (cur.next.next == null) {
+                        System.out.println("there isn`t node after the node you selected");
+                    } else {
+                        System.out.println("the node after the selected node is: " + cur.next.next.data);
+                    }
+                    break;
+                }
+                cur = cur.next;
+            }
+
+
+        }
+    }
+
+    //    Ends of Displays methods
+
 }
 
-
-public void Display_last(){
-System.out.println(tail.data);
-}
-
-public void Display_count(){
-System.out.println(this.count());
-}
-
-
-public void Display_pre_suss_node(String n){
-Node crant=head;
-if((n==tail.data)){
-    System.out.println("The pre Node of "+n+" is : "+crant.data);
-    System.out.println("The suss Node of "+n+" is : "+tail.next);
-}
-else if(head.data==n){
-System.out.println("The pre Node of "+n+" is : "+"Nothing");
-System.out.println("The suss Node of "+n+" is : "+head.next.data);
-}
-else{
-while(crant!=tail){
-if(crant.next.data==n){
-System.out.println("The pre Node of "+n+" is : "+crant.data);
-System.out.println("The suss Node of "+n+" is : "+crant.next.next.data);
-
-}
-crant=crant.next;
-}
-}
-}
-///Displaying 
-////////////////////////
-
-
-
-////sarech////
-
-public void Search_Node(String n){
-Node crant=head;
-boolean i=true;
-if(i==true){
-while(crant!=null){
-
-if(crant.data==n){
-System.out.println("The node is found ");
-i=true;
-break;
-}
-
-crant=crant.next;
-i=false;
-}}
-if(i==false){
-System.out.println("The node is not found");
-}
-}
-    
-}
