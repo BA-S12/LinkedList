@@ -59,7 +59,7 @@ public class SingleLinkedList_NoTail {
         if (head == null){
             System.out.println("The list is empty");
         }
-        else if (head == head.next) {
+        else if (head.next == null) {
             System.out.println("The list just have one Node");
         }
         else{
@@ -137,37 +137,33 @@ public class SingleLinkedList_NoTail {
     }
 
 
-    public void deleteAfterNode(String value){
-        if (head == null)
+    public void deleteAfterNode(String value) {
+        if (head == null) {
             System.out.println("The list is empty");
-        else if (head.data.equals(value)) {
-            head.next = head.next.next;
+        } else {
+            SingleNode cur = head;
+            boolean found = false;
+
+            while (cur != null) {
+                if (cur.data.equals(value)) {
+                    if (cur.next != null) {
+                        cur.next = cur.next.next;
+                        found = true;
+                    } else {
+                        System.out.println("There is no node after the node you selected");
+                        found = true;
+                    }
+                    break;
+                }
+                cur = cur.next;
+            }
+
+            if (!found) {
+                System.out.println("Node with value " + value + " not found");
+            }
         }
-        else{
-             SingleNode cur = head;
-             boolean found =false;
-
-             while(cur != null){
-                 if (cur.data.equals(value)) {
-                     if (cur.next != null) {
-                         cur.next = cur.next.next;
-                         found = true;
-                     } else {
-                         System.out.println("There is no node after the node you selected");
-                         found = true;
-                     }
-                     break;
-                 }
-
-
-                 cur = cur.next;
-             }
-             if (!found){
-                 System.out.println("Node with value " + value + " not found");
-             }
-        }
-
     }
+
 
 
 //    Ends of deletes Methods
