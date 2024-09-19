@@ -91,63 +91,64 @@ public class SingleLinkedList_Tail {
         }
     }
 
-    public void deleteLast(){
-        if (head == null){
+    public void deleteLast() {
+        if (head == null) {
             System.out.println("The list is empty");
-        }
-        else if (head.next == null) {
+        } else if (head.next == null) {
             head = null;
-        }
-        else {
+            tail = null;
+        } else {
             SingleNode cur = head;
-            while (cur.next.next != null){
+            while (cur.next.next != null) {
                 cur = cur.next;
             }
             cur.next = null;
+            tail = cur;
         }
     }
+
 
     public void deleteNode(String value) {
         if (head == null) {
             System.out.println("The list is empty");
         } else if (head.data.equals(value)) {
             deleteFirst();
-
         } else {
             SingleNode cur = head;
             boolean found = false;
             while (cur.next != null) {
                 if (cur.next.data.equals(value)) {
-                    // Deleting the node by skipping it
                     cur.next = cur.next.next;
                     found = true;
+                    if (cur.next == null) {
+                        tail = cur;
+                    }
                     break;
                 }
-
                 cur = cur.next;
             }
 
             if (!found) {
                 System.out.println("Node with value " + value + " not found");
             }
-
         }
     }
 
 
-    public void deleteAfterNode(String value){
-        if (head == null)
-            System.out.println("The list is empty");
-        else if (head.data.equals(value)) {
-            head.next = head.next.next;
-        }
-        else{
-            SingleNode cur = head;
-            boolean found =false;
 
-            while(cur != null){
+    public void deleteAfterNode(String value) {
+        if (head == null) {
+            System.out.println("The list is empty");
+        } else {
+            SingleNode cur = head;
+            boolean found = false;
+
+            while (cur != null) {
                 if (cur.data.equals(value)) {
                     if (cur.next != null) {
+                        if (cur.next.next == null) {
+                            tail = cur;
+                        }
                         cur.next = cur.next.next;
                         found = true;
                     } else {
@@ -156,16 +157,15 @@ public class SingleLinkedList_Tail {
                     }
                     break;
                 }
-
-
                 cur = cur.next;
             }
-            if (!found){
+
+            if (!found) {
                 System.out.println("Node with value " + value + " not found");
             }
         }
-
     }
+
 
 
 //    Ends of deletes Methods
