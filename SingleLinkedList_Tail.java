@@ -98,19 +98,13 @@ public class SingleLinkedList_Tail {
         else if (head.next == null) {
             head = null;
         }
-        else{
-             SingleNode NewTaile;
-         SingleNode crant=head.next;
-   while(crant!=null){
-   if(crant.next==tail){
-   NewTaile=crant;
-   tail=null;
-   tail=NewTail;
-   tail.next=null;        
-   }
-  crant=crant.next;
-   }
-     }
+        else {
+            SingleNode cur = head;
+            while (cur.next.next != null){
+                cur = cur.next;
+            }
+            cur.next = null;
+        }
     }
 
     public void deleteNode(String value) {
@@ -256,32 +250,39 @@ public class SingleLinkedList_Tail {
     public int displayCount(){
         return count();
     }
-    public void displayPreSussNode(String value){
-        if (head == null){
+    public void displayPreSussNode(String value) {
+        if (head == null) {
             System.out.println("The list is empty");
-        } else if (head.data.equals(value)) {
-            System.out.println("there is no previous node");
-            System.out.println("the node after the selected node is: " +head.next.data);
+            return;
         }
-        else{
-            SingleNode cur = head;
-            while(cur != null){
-                if (cur.next.data.equals(value)){
-                    System.out.println("the node before the selected node is: "+cur.data);
 
-                    if (cur.next.next == null) {
-                        System.out.println("there isn`t node after the node you selected");
-                    } else {
-                        System.out.println("the node after the selected node is: " + cur.next.next.data);
-                    }
-                    break;
-                }
-                cur = cur.next;
+        if (head.data.equals(value)) {
+            System.out.println("There is no previous node");
+            if (head.next != null) {
+                System.out.println("The node after the selected node is: " + head.next.data);
+            } else {
+                System.out.println("There is no node after the selected node");
             }
-
-
+            return;
         }
+
+        SingleNode cur = head;
+        while (cur.next != null) {
+            if (cur.next.data.equals(value)) {
+                System.out.println("The node before the selected node is: " + cur.data);
+                if (cur.next.next != null) {
+                    System.out.println("The node after the selected node is: " + cur.next.next.data);
+                } else {
+                    System.out.println("There isn't a node after the node you selected");
+                }
+                return;
+            }
+            cur = cur.next;
+        }
+
+        System.out.println("The node with the given value was not found in the list.");
     }
+
 
     //    Ends of Displays methods
 
