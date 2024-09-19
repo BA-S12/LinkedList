@@ -98,13 +98,19 @@ public class SingleLinkedList_Tail {
         else if (head.next == null) {
             head = null;
         }
-        else {
-            SingleNode cur = head;
-            while (cur.next.next != null){
-                cur = cur.next;
-            }
-            cur.next = null;
-        }
+        else{
+             SingleNode NewTaile;
+         SingleNode crant=head.next;
+   while(crant!=null){
+   if(crant.next==tail){
+   NewTaile=crant;
+   tail=null;
+   tail=NewTail;
+   tail.next=null;        
+   }
+  crant=crant.next;
+   }
+     }
     }
 
     public void deleteNode(String value) {
