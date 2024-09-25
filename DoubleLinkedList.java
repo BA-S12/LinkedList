@@ -276,5 +276,19 @@ crant=crant.next;
 }
 }
 } 
-     
+      public int computesSum(int n){
+        int sum = 0;
+        int count = 0;
+        DoubleNode cur = head;
+
+        while(cur != tail){
+            if (count == n)
+                break;
+            sum+=Integer.parseInt(cur.data);
+            count++;
+            cur = cur.next;
+        }
+        return sum;
+
+    }
 }
