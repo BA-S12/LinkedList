@@ -276,19 +276,32 @@ crant=crant.next;
 }
 }
 } 
-      public int computesSum(int n){
-        int sum = 0;
-        int count = 0;
-        DoubleNode cur = head;
-
-        while(cur != tail){
-            if (count == n)
-                break;
-            sum+=Integer.parseInt(cur.data);
-            count++;
-            cur = cur.next;
+          public void computesSum(int n){
+        if (head == null){
+            System.out.println("the list is empty");
         }
-        return sum;
+        else if (n>displayCount()){
+            System.out.println("the number entered is smallest then size");
+        }
+       else if (n<=0){
+           throw new InputMismatchException("You must enter number greeter then 0");
+//            System.out.println("You must enter number greeter then 0");
+        }
+       else{
+            int sum = 0;
+            int count = 0;
+            DoubleNode cur = head;
+
+            while(cur != null){
+                if (count == n)
+                    break;
+                sum+=Integer.parseInt(cur.data);
+                count++;
+                cur = cur.next;
+            }
+            System.out.println(sum);
+        }
+
 
     }
 }
