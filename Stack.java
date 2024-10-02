@@ -28,4 +28,17 @@ public class Stack {
     public int size(){
         return singleLinkedList.displayCount();
     }
+
+        public void reverseStack(){
+    String r[]=new String[this.size()];
+    for(int i=0;i<r.length;i++){
+r[i]=singleLinkedList.head.data;
+singleLinkedList.deleteFirst();
+   
+    }
+    for(int i=0;i<r.length;i++){
+singleLinkedList.insertFirst(r[i]);
+    }
+    singleLinkedList.displayList();
+    }
 }
