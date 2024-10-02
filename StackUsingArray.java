@@ -67,7 +67,7 @@ public class StackUsingArray {
     }
 
     public int pop(){
-       return deleteLast();
+       return deleteFirst();
     }
 
 
