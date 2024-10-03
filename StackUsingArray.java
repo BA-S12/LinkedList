@@ -31,7 +31,7 @@ public class StackUsingArray {
             System.out.println("the stack is full");
             return;
         }
-        stack[++top] = value;
+        stack[top++] = value;
         size++;
     }
 
