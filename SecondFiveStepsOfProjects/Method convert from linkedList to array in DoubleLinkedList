@@ -7,10 +7,10 @@
     else{
     
     a=new String[this.count()];
-    DoubleNode crant=head;
+    DoubleNode cur=head;
     for(int i=0;i<a.length;i++){
-    a[i]=crant.data;
-    crant=crant.next;
+    a[i]=cur.data;
+    cur=cur.next;
     }
     
        return a;
