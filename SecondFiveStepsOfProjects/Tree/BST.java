@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.ArrayDeque;
 
 public class BST {
 
    private TreeNode root;
+   private int size;
+   private int rightsize;
+    private int leftsize;
 
 //      insert methods
     public void insert(int value){
         root =  insert(root,value);
+       size++;
     }
     public TreeNode insert(TreeNode node, int value){
         if (node == null){
@@ -270,7 +275,285 @@ public void delete(int value) {
 
 //    Ends of printing Methods
 //    Traversing Methods
-     // Helper Methods    
+     public void size(){
+       if(root==null)
+           System.out.println("The tree is empty");
+         else
+       System.out.println("The size of tree is "+this.size);
+       }
+     
+      
+       public void FindMax(){
+           if(root==null)
+               System.out.println("The tree is empty so we cannot do this method");
+           else
+       System.out.println("The MaxNode in tree is: "+this.FindMaxTree(root).data);
+       }
+   
+        public void FindMin(){
+       
+  if(root==null)
+               System.out.println("The tree is empty so we cannot do this method");
+           else
+       System.out.println("The MinNode in tree is: "+this.FindMinTree(root).data);
+       }
+
+    public void NumberofEdge(){
+      if(size==0)
+          System.out.println("The number of edgs is : 0 becose the tree is null");
+      else
+       System.out.println("The number of edgs :"+(size-1));
+      }
+      
+     public void Inorder_LeftRight() 
+     {
+              System.out.print("The InOrder from Left to Right is: ");
+		inorderTree_LeftRight(root);
+		System.out.println();
+	}
+
+     public void Inorder_RightLeft() 
+     {
+         System.out.print("The InOrder from Right to Left is: ");
+		inorderTree_RightLeft(root);
+		System.out.println();
+	}
+
+   public void Preorder_LeftRight(){
+                   System.out.print("The pretOrder from Left to Right is: ");
+        PreorderTree_LeftRight(root);
+        System.out.println();
+        
+        }
+   
+   public void Preorder_RightLeft(){
+             System.out.print("The pretOrder from Right to Left is: ");
+        PreorderTree_RightLeft(root);
+        System.out.println();
+        
+        }
+
+   public void Postorder_LeftRight(){
+         System.out.print("The postOrder from Left to Right is: ");
+      PostorderTree_LeftRight(root);
+      System.out.println();
+      
+    }
+
+     public void Postorder_RightLeft(){
+          
+          System.out.print("The postOrder from Right to Left is: ");
+      PostorderTree_RightLeft(root);
+      System.out.println();
+      
+    }
+      
+public void sizeLeft(){
+if(root.left==null)
+    System.out.println("The size is 0 so becose thear is no any elemnt on the left");
+else{
+
+System.out.println("The size of left is " +(sizeLeftTree(root.left)+1));
+}
+}
+  
+   public void sizeRight(){
+if(root.right==null)
+    System.out.println("The size is 0 so becose thear is no any elemnt on the left");
+else{
+
+System.out.println("The size of left is " +(sizeRightTree(root.right)+1));
+}
+
+      public void search(int node){
+if(root==null)
+    System.out.println("The tree is empty  ");
+else{
+if(this.searchTree(root,node)==true)
+    System.out.println("The node is found :)");
+else
+    System.out.println("The node is not found :(");
+}
+
+}
+
+   public void levelOrder_LeftRight() 
+	{
+		levelOrderTree_LeftRight(root);
+		System.out.println();
+	}
+
+    public void levelOrder_RightLeft() 
+	{
+		levelOrderTree_RightLeft(root);
+		System.out.println();
+	}
+        
+     // Helper Methods  
+    private TreeNode FindMaxTree(TreeNode Node){
+     
+       if(Node.right==null)
+           return Node;
+       else
+           return FindMaxTree(Node.right);
+
+       }
+   
+     private TreeNode FindMinTree(TreeNode Node){
+     
+       if(Node.left==null)
+           return Node;
+       else
+           return FindMinTree(Node.left);
+       
+       }
+   private void inorderTree_LeftRight(TreeNode node) 
+	{
+		if (node == null) 
+		{
+			return;
+		}
+		// left, node itself, right
+		inorderTree_LeftRight(node.left);
+		System.out.print(node.data + " ");
+		inorderTree_LeftRight(node.right);
+	}
+
+   private void inorderTree_RightLeft(TreeNode node) 
+	{
+		if (node == null) 
+		{
+			return;
+		}
+		// right, node itself, left
+		inorderTree_RightLeft(node.right);
+		System.out.print(node.data + " ");
+		inorderTree_RightLeft(node.left);
+	}
+        private void PreorderTree_LeftRight(TreeNode node){
+      
+          if(node==null){
+          return;
+          }
+          //viset,left,right
+          System.out.print(node.data+" ");
+          PreorderTree_LeftRight(node.left);
+          PreorderTree_LeftRight(node.right);
+      
+      }
+   private void PreorderTree_RightLeft(TreeNode node){
+      
+          if(node==null){
+          return;
+          }
+          //viset,right,left
+          System.out.print(node.data+" ");
+          PreorderTree_RightLeft(node.right);
+          PreorderTree_RightLeft(node.left);
+      
+      }
+      
+    private void PostorderTree_LeftRight(TreeNode node){
+    if(node==null){
+    return;
+    }
+    //left,right,vesit
+   PostorderTree_LeftRight(node.left);
+   PostorderTree_LeftRight(node.right);
+  System.out.print(node.data+" ");
+    
+    } 
+    private void PostorderTree_RightLeft(TreeNode node){
+    if(node==null){
+    return;
+    }
+    //right,left,vesit
+     PostorderTree_RightLeft(node.right);
+    PostorderTree_RightLeft(node.left);
+  System.out.print(node.data+" ");
+    
+    }
+   private int sizeLeftTree(TreeNode node){
+  
+if(node==null){
+    return 0;}
+else{
+ 
+sizeLeftTree(node.left);
+sizeLeftTree(node.right);
+return leftsize++;
+
+}
+}
+private int sizeRightTree(TreeNode node){
+  
+if(node==null){
+    return 0;}
+else{
+ 
+sizeRightTree(node.left);
+sizeRightTree(node.right);
+return rightsize++;
+
+}
+}
+private boolean searchTree(TreeNode node,int nodeSearch){
+if(node==null)
+    return false;
+else if(node.data==nodeSearch)
+    return true;
+else{
+    
+   return searchTree(node.left,nodeSearch)||searchTree(node.right,nodeSearch);
+  
+ }
+}
+   private void levelOrderTree_LeftRight(TreeNode node) 
+	{
+		if (node != null) 
+		{
+			Queue<TreeNode> q = new ArrayDeque<TreeNode>();
+			q.add(node);
+			while (q.size() != 0) 
+			{
+				TreeNode currentNode = q.remove();
+				System.out.print(currentNode.data + " ");
+				if (currentNode.left != null) 
+				{
+					q.add(currentNode.left);
+				}
+				if (currentNode.right != null) 
+				{
+					q.add(currentNode.right);
+				}
+			}
+		}
+	}
+
+   private void levelOrderTree_RightLeft(TreeNode node) 
+	{
+		if (node != null) 
+		{
+			Queue<TreeNode> q = new ArrayDeque<TreeNode>();
+			q.add(node);
+			while (q.size() != 0) 
+			{
+				TreeNode currentNode = q.remove();
+				System.out.print(currentNode.data + " ");
+				
+				if (currentNode.right != null) 
+				{
+					q.add(currentNode.right);
+				}
+                                if (currentNode.left != null) 
+				{
+					q.add(currentNode.left);
+				}
+			}
+		}
+	}
+
+   
      // Ends of Helper Methods    
 //    Ends of Traversing Methods
 
