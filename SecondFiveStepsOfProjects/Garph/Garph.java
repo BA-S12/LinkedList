@@ -157,7 +157,6 @@ public class Graph {
     public void displayConnectedGraph() {
         boolean[] visited = new boolean[numOfVertices];
 
-        // Start from any vertex (e.g., the first added vertex)
         dfs(0, visited);
 
         boolean isConnected = true;
