@@ -190,5 +190,41 @@ else
     System.out.println("The number of Edges is : "+this.numberofEdges);
 
 }
+
+
+public void BFS(String Virtex){
+
+
+for(int i=0;i<this.adjMatrix.length-1;i++){
+    if((this.getVertexByIndex(i)==Virtex)&&(q.search(Virtex)==false)){
+q.Sp_enqueue(Virtex);
+   for(int j=0;j<this.adjMatrix[i].length;j++){
+    if((this.adjMatrix[i][j]==1)&&q.search(this.getVertexByIndex(j))==false){
+    q.Sp_enqueue(this.getVertexByIndex(j));
+    }
+    
+    
+    }
+}
+ 
+
+
+}
+
+if(q.size()==0){
+
+    
+
+}
+else{
+
+System.out.print(q.getTop()+",");
+
+
+q.Sp_dequeue();
+BFS(q.getTop());
+
+}
+}
          
 }
