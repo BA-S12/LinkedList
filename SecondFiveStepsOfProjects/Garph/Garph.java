@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Graph {
-    private int[][] adjMatrix;
+    public int[][] adjMatrix;
     private Map<String, Integer> vertices;
     private int numOfVertices;
     private int numberOfEdges;
