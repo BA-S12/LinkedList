@@ -1,0 +1,46 @@
+    
+    public static void main(String[] args) {
+  int[] x={3,6,4,1,9,6,4};
+  DoubleLinekedLista d=new DoubleLinekedLista();
+  d.insertFirst("3");
+  d.insertLast("6");
+  d.insertLast("4");
+  d.insertLast("1");
+  d.insertLast("9");
+  d.insertLast("6");
+  
+  
+   int[] y={1,2,3,4,5,6,7,8,9};  
+
+  DoubleLinekedLista d2=new DoubleLinekedLista();   
+    d2.insertFirst("1");
+  d2.insertLast("2");
+  d2.insertLast("3");
+  d2.insertLast("4");
+  d2.insertLast("5");
+  d2.insertLast("6");
+  d2.insertFirst("0");
+  String s1="2";
+  String s2="2";
+  System.out.println(s1.compareTo(s1));
+          
+  
+  Search_Srot s=new Search_Srot();
+  
+ s.Linear_Searcharray(x, 6);
+ s.Linear_Searchlinkedlist(d, 6);
+ 
+ System.out.println(s.Binary_Searcharray(x, 1, 0, x.length-1));
+ s.Binary_SearchListlist(d2,100,d2.head,d2.tail);
+ 
+ 
+ //sort
+   int[] z={7,14,12,33,5,19};
+ 
+ s.Selection_Sortarry(z);
+
+s.Bubble_Sortarray(z);
+s.Bubble_Sortlinkedlist(d);
+    }
+    
+}
