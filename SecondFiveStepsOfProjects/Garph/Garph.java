@@ -152,27 +152,27 @@ public class Graph {
             System.out.println("The graph is not complete.");
         }
     }
+public void displayConnectGraph(){
+ boolean isConnected = true;
+
+for(int r=0;r<adjMatrix.length;r++){
+for(int c=0;c<adjMatrix[r].length;c++){
+  if(adjMatrix[r][c]==(1))
+      isConnected=true;
+  else
+      break;
+}
+
+}
+if(isConnected==true){
+    System.out.println("The graph is  Connect");
+}
+else{
+    System.out.println("The graph is not Connect");}
+
+}
 
 
-    public void displayConnectedGraph() {
-        boolean[] visited = new boolean[numOfVertices];
-
-        dfs(0, visited);
-
-        boolean isConnected = true;
-        for (boolean v : visited) {
-            if (!v) {
-                isConnected = false;
-                break;
-            }
-        }
-
-        if (isConnected) {
-            System.out.println("The graph is connected.");
-        } else {
-            System.out.println("The graph is not connected.");
-        }
-    }
     public void BFS(String startVertex) {
         if (!vertices.containsKey(startVertex)) {
             System.out.println("Start vertex not found.");
