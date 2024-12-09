@@ -501,6 +501,7 @@ public void delete(int value) {
 
     public void mirror() {
         root = mirrorTree(root);
+            inOrderLeftRight();
     }
     private TreeNode mirrorTree(TreeNode node) {
         if (node == null) return null;
