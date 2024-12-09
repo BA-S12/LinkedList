@@ -26,8 +26,9 @@ public class Graph {
         if(vertices.containsKey(source) && vertices.containsKey(target)){
             int sourceIndex = vertices.get(source);
             int targetIndex = vertices.get(target);
+            if(adjMatrix[sourceIndex][targetIndex] != 1){
             adjMatrix[sourceIndex][targetIndex] = 1;
-            numberOfEdges++;
+            numberOfEdges++;}
         }
         else {
             System.out.println("One or both vertices is not found");
