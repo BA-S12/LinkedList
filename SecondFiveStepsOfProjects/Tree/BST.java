@@ -1,24 +1,24 @@
 package SecondFiveStepsOfProjects.Tree;
 
+
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.ArrayDeque;
 
 public class BST {
 
-   private TreeNode root;
+   public TreeNode root;
    private int size;
-   private int rightsize;
-    private int leftsize;
-
+   private int rightSize;
+   private int leftSize;
 //      insert methods
     public void insert(int value){
         root =  insert(root,value);
-       size++;
+        size++;
     }
-    public TreeNode insert(TreeNode node, int value){
+    private TreeNode insert(TreeNode node, int value){
         if (node == null){
             node = new TreeNode(value);
             return node;
@@ -41,18 +41,18 @@ public class BST {
         return ((node.right!=null && node.left == null) || (node.right==null && node.left != null));
     }
     private int maxValue(TreeNode node){
-        int maxValue = root.data;
-        while (root.right !=null){
-            root = root.right;
-            maxValue = root.data;
+        int maxValue = node.data;
+        while (node.right !=null){
+            node = node.right;
+            maxValue = node.data;
         }
         return maxValue;
     }
     private int minValue(TreeNode node){
-        int minValue = root.data;
-        while (root.left !=null){
-            root = root.left;
-            minValue = root.data;
+        int minValue = node.data;
+        while (node.left !=null){
+            node = node.left;
+            minValue = node.data;
         }
         return minValue;
     }
@@ -78,7 +78,7 @@ public class BST {
         else
             return deleteNodeWithMoreThenOneChild(node);
     }
-    public TreeNode delete(TreeNode node, int value) {
+    private TreeNode delete(TreeNode node, int value) {
         if (node == null) return null;
 
         if (value < node.data) {
@@ -88,13 +88,12 @@ public class BST {
         } else {
             // Node to be deleted found
             if (node.left == null && node.right == null) {
-                return null; // No children, delete by returning null
+                return null;
             } else if (node.left == null) {
-                return node.right; // One child (right), return right child
+                return node.right;
             } else if (node.right == null) {
-                return node.left; // One child (left), return left child
+                return node.left;
             } else {
-                // Two children: replace with in-order successor (smallest in right subtree)
                 node.data = minValue(node.right);
                 node.right = delete(node.right, node.data);
             }
@@ -170,6 +169,7 @@ public void delete(int value) {
         return isFullTree(node.left) && isFullTree(node.right);
     }
 
+
     private int getDepth(TreeNode node) {
         int depth = 0;
         while (node != null) {
@@ -178,6 +178,7 @@ public void delete(int value) {
         }
         return depth;
     }
+
 
     private boolean isPerfectTree(TreeNode node, int depth, int level) {
         if (node == null) return true;
@@ -193,6 +194,7 @@ public void delete(int value) {
         if (Math.abs(leftHeight - rightHeight) > 1) return false;
         return isBalanced(node.left) && isBalanced(node.right);
     }
+
 
     private int height(TreeNode node) {
         if (node == null) return 0;
@@ -234,17 +236,24 @@ public void delete(int value) {
     }
 
 
-    public int displayDegreeNode(TreeNode node) {
-        if (node == null) return -1;
-        int degree = 0;
-        if (node.left != null) degree++;
-        if (node.right != null) degree++;
-        return degree;
-    }
+
+        public int displayDegreeNode(int value) {
+            TreeNode node = findNode(root, value);
+            if (node == null) {
+                System.out.println("Node with value " + value + " does not exist in the tree.");
+                return -1;
+            }
+            int degree = 0;
+            if (node.left != null) degree++;
+            if (node.right != null) degree++;
+            return degree;
+        }
+
 
     public boolean displayIsFullTree() {
         return isFullTree(root);
     }
+
 
     public boolean displayIsCompleteTree() {
         if (root == null) return true;
@@ -272,290 +281,258 @@ public void delete(int value) {
     public boolean displayIsBalancedTrees() {
         return isBalanced(root);
     }
+//not in exam
 
 //    Ends of printing Methods
 //    Traversing Methods
-     public void size(){
-       if(root==null)
-           System.out.println("The tree is empty");
-         else
-       System.out.println("The size of tree is "+this.size);
-       }
-     
-      
-       public void FindMax(){
-           if(root==null)
-               System.out.println("The tree is empty so we cannot do this method");
-           else
-       System.out.println("The MaxNode in tree is: "+this.FindMaxTree(root).data);
-       }
-   
-        public void FindMin(){
-       
-  if(root==null)
-               System.out.println("The tree is empty so we cannot do this method");
-           else
-       System.out.println("The MinNode in tree is: "+this.FindMinTree(root).data);
-       }
 
-    public void NumberofEdge(){
-      if(size==0)
-          System.out.println("The number of edgs is : 0 becose the tree is null");
-      else
-       System.out.println("The number of edgs :"+(size-1));
-      }
-      
-     public void Inorder_LeftRight() 
-     {
-              System.out.print("The InOrder from Left to Right is: ");
-		inorderTree_LeftRight(root);
-		System.out.println();
-	}
-
-     public void Inorder_RightLeft() 
-     {
-         System.out.print("The InOrder from Right to Left is: ");
-		inorderTree_RightLeft(root);
-		System.out.println();
-	}
-
-   public void Preorder_LeftRight(){
-                   System.out.print("The pretOrder from Left to Right is: ");
-        PreorderTree_LeftRight(root);
-        System.out.println();
-        
-        }
-   
-   public void Preorder_RightLeft(){
-             System.out.print("The pretOrder from Right to Left is: ");
-        PreorderTree_RightLeft(root);
-        System.out.println();
-        
-        }
-
-   public void Postorder_LeftRight(){
-         System.out.print("The postOrder from Left to Right is: ");
-      PostorderTree_LeftRight(root);
-      System.out.println();
-      
+    public void inOrderLeftRight() {
+        inOrderLeftRight(root);
+    }
+    private void inOrderLeftRight(TreeNode node) {
+        if (node == null) return;
+        inOrderLeftRight(node.left);
+        System.out.print(node.data + " ");
+        inOrderLeftRight(node.right);
     }
 
-     public void Postorder_RightLeft(){
-          
-          System.out.print("The postOrder from Right to Left is: ");
-      PostorderTree_RightLeft(root);
-      System.out.println();
-      
+    public void inOrderRightLeft() {
+        inOrderRightLeft(root);
     }
-      
-public void sizeLeft(){
-if(root.left==null)
-    System.out.println("The size is 0 so becose thear is no any elemnt on the left");
-else{
+    private void inOrderRightLeft(TreeNode node) {
+        if (node == null) return;
+        inOrderRightLeft(node.right);
+        System.out.print(node.data + " ");
+        inOrderRightLeft(node.left);
+    }
 
-System.out.println("The size of left is " +(sizeLeftTree(root.left)+1));
-}
-}
-  
-   public void sizeRight(){
-if(root.right==null)
-    System.out.println("The size is 0 so becose thear is no any elemnt on the left");
-else{
+    // Pre-order LeftRight traversal
+    public void preOrderLeftRight() {
+        preOrderLeftRight(root);
+    }
+    private void preOrderLeftRight(TreeNode node) {
+        if (node == null) return;
+        System.out.print(node.data + " ");
+        preOrderLeftRight(node.left);
+        preOrderLeftRight(node.right);
+    }
 
-System.out.println("The size of left is " +(sizeRightTree(root.right)+1));
-}
+    // Pre-order RightLeft traversal
+    public void preOrderRightLeft() {
+        preOrderRightLeft(root);
+    }
+    private void preOrderRightLeft(TreeNode node) {
+        if (node == null) return;
+        System.out.print(node.data + " ");
+        preOrderRightLeft(node.right);
+        preOrderRightLeft(node.left);
+    }
 
-      public void search(int node){
-if(root==null)
-    System.out.println("The tree is empty  ");
-else{
-if(this.searchTree(root,node)==true)
-    System.out.println("The node is found :)");
-else
-    System.out.println("The node is not found :(");
-}
+    // Post-order LeftRight traversal
+    public void postOrderLeftRight() {
+        postOrderLeftRight(root);
+    }
+    private void postOrderLeftRight(TreeNode node) {
+        if (node == null) return;
+        postOrderLeftRight(node.left);
+        postOrderLeftRight(node.right);
+        System.out.print(node.data + " ");
+    }
 
-}
+    // Post-order RightLeft traversal
+    public void postOrderRightLeft() {
+        postOrderRightLeft(root);
+    }
+    private void postOrderRightLeft(TreeNode node) {
+        if (node == null) return;
+        postOrderRightLeft(node.right);
+        postOrderRightLeft(node.left);
+        System.out.print(node.data + " ");
+    }
 
-   public void levelOrder_LeftRight() 
-	{
-		levelOrderTree_LeftRight(root);
-		System.out.println();
-	}
+    public void levelOrderLeftRight() {
+        if (root == null) return;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            System.out.print(current.data + " ");
+            if (current.left != null) queue.add(current.left);
+            if (current.right != null) queue.add(current.right);
+        }
+    }
 
-    public void levelOrder_RightLeft() 
-	{
-		levelOrderTree_RightLeft(root);
-		System.out.println();
-	}
-        
-     // Helper Methods  
+
+    public void levelOrderRightLeft() {
+        if (root == null) return;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            System.out.print(current.data + " ");
+            if (current.right != null) queue.add(current.right);
+            if (current.left != null) queue.add(current.left);
+        }
+    }
+
+    public void size(){
+        if(root==null)
+            System.out.println("The tree is empty");
+        else
+            System.out.println("The size of tree is "+this.size);
+    }
+
+
+    public void findMax(){
+        if(root==null)
+            System.out.println("The tree is empty, so we cannot do this method");
+        else
+            System.out.println("The MaxNode in tree is: "+this.FindMaxTree(root).data);
+    }
+//    Helper Methods
     private TreeNode FindMaxTree(TreeNode Node){
-     
-       if(Node.right==null)
-           return Node;
-       else
-           return FindMaxTree(Node.right);
+    if(Node.right==null)
+        return Node;
+    else
+        return FindMaxTree(Node.right);
 
-       }
-   
-     private TreeNode FindMinTree(TreeNode Node){
-     
-       if(Node.left==null)
-           return Node;
-       else
-           return FindMinTree(Node.left);
-       
-       }
-   private void inorderTree_LeftRight(TreeNode node) 
-	{
-		if (node == null) 
-		{
-			return;
-		}
-		// left, node itself, right
-		inorderTree_LeftRight(node.left);
-		System.out.print(node.data + " ");
-		inorderTree_LeftRight(node.right);
-	}
+}
+    private TreeNode FindMinTree(TreeNode Node){
 
-   private void inorderTree_RightLeft(TreeNode node) 
-	{
-		if (node == null) 
-		{
-			return;
-		}
-		// right, node itself, left
-		inorderTree_RightLeft(node.right);
-		System.out.print(node.data + " ");
-		inorderTree_RightLeft(node.left);
-	}
-        private void PreorderTree_LeftRight(TreeNode node){
-      
-          if(node==null){
-          return;
-          }
-          //viset,left,right
-          System.out.print(node.data+" ");
-          PreorderTree_LeftRight(node.left);
-          PreorderTree_LeftRight(node.right);
-      
-      }
-   private void PreorderTree_RightLeft(TreeNode node){
-      
-          if(node==null){
-          return;
-          }
-          //viset,right,left
-          System.out.print(node.data+" ");
-          PreorderTree_RightLeft(node.right);
-          PreorderTree_RightLeft(node.left);
-      
-      }
-      
-    private void PostorderTree_LeftRight(TreeNode node){
-    if(node==null){
-    return;
+        if(Node.left==null)
+            return Node;
+        else
+            return FindMinTree(Node.left);
+
     }
-    //left,right,vesit
-   PostorderTree_LeftRight(node.left);
-   PostorderTree_LeftRight(node.right);
-  System.out.print(node.data+" ");
-    
-    } 
-    private void PostorderTree_RightLeft(TreeNode node){
-    if(node==null){
-    return;
+//    Helper Methods
+
+    public void findMin(){
+
+        if(root==null)
+            System.out.println("The tree is empty, so we cannot do this method");
+        else
+            System.out.println("The MinNode in tree is: "+this.FindMinTree(root).data);
     }
-    //right,left,vesit
-     PostorderTree_RightLeft(node.right);
-    PostorderTree_RightLeft(node.left);
-  System.out.print(node.data+" ");
-    
+
+    public void numberOfEdge(){
+        if(size==0)
+            System.out.println("The number of edge is : 0 because the tree is null");
+        else
+            System.out.println("The number of edges is :"+(size-1));
     }
-   private int sizeLeftTree(TreeNode node){
-  
-if(node==null){
-    return 0;}
-else{
- 
-sizeLeftTree(node.left);
-sizeLeftTree(node.right);
-return leftsize++;
 
-}
-}
-private int sizeRightTree(TreeNode node){
-  
-if(node==null){
-    return 0;}
-else{
- 
-sizeRightTree(node.left);
-sizeRightTree(node.right);
-return rightsize++;
 
-}
-}
-private boolean searchTree(TreeNode node,int nodeSearch){
-if(node==null)
-    return false;
-else if(node.data==nodeSearch)
-    return true;
-else{
-    
-   return searchTree(node.left,nodeSearch)||searchTree(node.right,nodeSearch);
-  
- }
-}
-   private void levelOrderTree_LeftRight(TreeNode node) 
-	{
-		if (node != null) 
-		{
-			Queue<TreeNode> q = new ArrayDeque<TreeNode>();
-			q.add(node);
-			while (q.size() != 0) 
-			{
-				TreeNode currentNode = q.remove();
-				System.out.print(currentNode.data + " ");
-				if (currentNode.left != null) 
-				{
-					q.add(currentNode.left);
-				}
-				if (currentNode.right != null) 
-				{
-					q.add(currentNode.right);
-				}
-			}
-		}
-	}
+    public void sizeLeft(){
+        if(root.left==null)
+            System.out.println("The size is 0 so becose thear is no any elemnt on the left");
+        else{
 
-   private void levelOrderTree_RightLeft(TreeNode node) 
-	{
-		if (node != null) 
-		{
-			Queue<TreeNode> q = new ArrayDeque<TreeNode>();
-			q.add(node);
-			while (q.size() != 0) 
-			{
-				TreeNode currentNode = q.remove();
-				System.out.print(currentNode.data + " ");
-				
-				if (currentNode.right != null) 
-				{
-					q.add(currentNode.right);
-				}
-                                if (currentNode.left != null) 
-				{
-					q.add(currentNode.left);
-				}
-			}
-		}
-	}
+            System.out.println("The size of left is " +(sizeLeftTree(root.left)+1));
+        }
+    }
 
-   
-     // Ends of Helper Methods    
+    public void sizeRight() {
+        if (root.right == null)
+            System.out.println("The size is 0 so becose thear is no any elemnt on the left");
+        else {
+
+            System.out.println("The size of left is " + (sizeRightTree(root.right) + 1));
+        }
+    }
+        public void search ( int value){
+            if (root == null)
+                System.out.println("The tree is empty  ");
+            else {
+                if (searchTree(root, value))
+                    System.out.println("The node is found :)");
+                else
+                    System.out.println("The node is not found :(");
+            }
+
+        }
+
+//        Helper methods
+        private int sizeLeftTree (TreeNode node){
+
+            if (node == null) {
+                return 0;
+            } else {
+
+                sizeLeftTree(node.left);
+                sizeLeftTree(node.right);
+                return leftSize++;
+
+            }
+        }
+        private int sizeRightTree (TreeNode node){
+
+            if (node == null) {
+                return 0;
+            } else {
+
+                sizeRightTree(node.left);
+                sizeRightTree(node.right);
+                return rightSize++;
+
+            }
+        }
+        private boolean searchTree (TreeNode node,int nodeSearch){
+            if (node == null)
+                return false;
+            else if (node.data == nodeSearch)
+                return true;
+            else {
+
+                return searchTree(node.left, nodeSearch) || searchTree(node.right, nodeSearch);
+
+            }
+        }
+
+    private TreeNode findNode(TreeNode node, int value) {
+        if (node == null) return null;
+        if (node.data == value) return node;
+        TreeNode leftSearch = findNode(node.left, value);
+        if (leftSearch != null) return leftSearch;
+        return findNode(node.right, value);
+    }
+//        Helper methods
+
+
+    public void mirror() {
+        root = mirrorTree(root);
+    }
+    private TreeNode mirrorTree(TreeNode node) {
+        if (node == null) return null;
+
+        TreeNode temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+
+        mirrorTree(node.left);
+        mirrorTree(node.right);
+
+        return node;
+    }
+
 //    Ends of Traversing Methods
+
+
+//    For heap sort
+// In-order Traversal to Extract Elements
+public List<Integer> inOrderTraversal() {
+    List<Integer> result = new ArrayList<>();
+    inOrderTraversalRec(root, result);
+    return result;
+}
+
+    private void inOrderTraversalRec(TreeNode node, List<Integer> result) {
+        if (node != null) {
+            inOrderTraversalRec(node.left, result);
+            result.add(node.data);
+            inOrderTraversalRec(node.right, result);
+        }
+    }
 
 
 }
