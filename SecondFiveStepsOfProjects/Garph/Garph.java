@@ -26,8 +26,9 @@ public class Graph {
         if(vertices.containsKey(source) && vertices.containsKey(target)){
             int sourceIndex = vertices.get(source);
             int targetIndex = vertices.get(target);
-            adjMatrix[sourceIndex][targetIndex] = 1;
-            numberOfEdges++;
+            if(adjMatrix[sourceIndex][targetIndex] != 1){
+                adjMatrix[sourceIndex][targetIndex] = 1;
+                numberOfEdges++;}
         }
         else {
             System.out.println("One or both vertices is not found");
@@ -36,24 +37,24 @@ public class Graph {
 
 
     public void printGraph(){
-        System.out.println("Graph: ");
+        System.out.println("Adjacency Matrix: ");
 
-        for (Map.Entry<String,Integer> entry : vertices.entrySet()){
-            String vertex = entry.getKey();
-            System.out.print(vertex+ " ==> ");
+        System.out.print("   ");
 
-            int vertexIndex = entry.getValue();
-            boolean hasEdge = false;
+        for (String vertex : vertices.keySet()){
+            System.out.print(vertex+" ");
+        }
+        System.out.println();
+
+        for (Map.Entry<String,Integer> rowEntry : vertices.entrySet()){
+            System.out.print(rowEntry.getKey()+ " ");
+            int rowIndex = rowEntry.getValue();
+
             for (int i = 0; i <numOfVertices ; i++) {
-                if (adjMatrix[vertexIndex][i] == 1){
-                    System.out.print(getVertexByIndex(i)+", ");
-                    hasEdge = true;
-                }
-            }
-            if (!hasEdge){
-                System.out.print("There aren`t edge for this vertex");
+                System.out.print(adjMatrix[rowIndex][i]+" ");
             }
             System.out.println();
+
         }
     }
 
@@ -136,6 +137,10 @@ public class Graph {
     public void displayCompleteGraph() {
         boolean isComplete = true;
 
+        if (isConnect){
+            System.out.println("The graph is not connected so is not Complete");
+            return;
+        }
         for (int i = 0; i < numOfVertices; i++) {
             for (int j = 0; j < numOfVertices; j++) {
                 if (i != j && adjMatrix[i][j] == 0) {
@@ -152,25 +157,28 @@ public class Graph {
             System.out.println("The graph is not complete.");
         }
     }
-public void displayConnectGraph(){
- boolean isConnected = true;
 
-for(int r=0;r<adjMatrix.length;r++){
-for(int c=0;c<adjMatrix[r].length;c++){
-  if(adjMatrix[r][c]==(1))
-      isConnected=true;
-  else
-      break;
-}
 
-}
-if(isConnected==true){
-    System.out.println("The graph is  Connect");
-}
-else{
-    System.out.println("The graph is not Connect");}
+    boolean isConnect;
+    public void displayConnectGraph(){
+        for(int i=0;i<adjMatrix.length-1;i++){
 
-}
+            if(adjMatrix[i][i+1]==1){
+                this.isConnect=true;
+            }
+            else{this.isConnect=false; break;}
+        }
+
+
+        if(adjMatrix[adjMatrix.length-1][0]!=1){
+            isConnect=false;}
+
+        if(this.isConnect){
+            System.out.println("The graph is connected");
+        }
+        else
+            System.out.println("The graph is not connected");
+    }
 
 
     public void BFS(String startVertex) {
@@ -226,25 +234,25 @@ else{
     }
 
     //    Additional methods
-    public void printAdjMatrix(){
-        System.out.println("Adjacency Matrix: ");
+    public void printAnotherFormat(){
+        System.out.println("Graph: ");
 
-        System.out.print("   ");
+        for (Map.Entry<String,Integer> entry : vertices.entrySet()){
+            String vertex = entry.getKey();
+            System.out.print(vertex+ " ==> ");
 
-        for (String vertex : vertices.keySet()){
-            System.out.print(vertex+" ");
-        }
-        System.out.println();
-
-        for (Map.Entry<String,Integer> rowEntry : vertices.entrySet()){
-            System.out.print(rowEntry.getKey()+ " ");
-            int rowIndex = rowEntry.getValue();
-
+            int vertexIndex = entry.getValue();
+            boolean hasEdge = false;
             for (int i = 0; i <numOfVertices ; i++) {
-                System.out.print(adjMatrix[rowIndex][i]+" ");
+                if (adjMatrix[vertexIndex][i] == 1){
+                    System.out.print(getVertexByIndex(i)+", ");
+                    hasEdge = true;
+                }
             }
-        System.out.println();
-
+            if (!hasEdge){
+                System.out.print("There aren`t edge for this vertex");
+            }
+            System.out.println();
         }
     }
 
