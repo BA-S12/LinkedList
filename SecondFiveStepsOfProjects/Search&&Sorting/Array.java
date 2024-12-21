@@ -140,8 +140,15 @@ public class Array {
 
 
 
-        System.arraycopy(arr, 0, left, 0, mid);
-        System.arraycopy(arr, mid, right, 0, arr.length - mid);
+    // Copy elements to the left array
+        for (int i = 0; i < mid; i++) {
+            left[i] = arr[i];
+        }
+
+    // Copy elements to the right array
+        for (int i = mid; i < arr.length; i++) {
+            right[i - mid] = arr[i];
+        }
 
         mergeSort(left);
         mergeSort(right);
